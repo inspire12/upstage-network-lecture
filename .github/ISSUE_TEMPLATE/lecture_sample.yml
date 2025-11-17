@@ -1,6 +1,6 @@
 name: Lecture Template
 description: 강의 준비를 위한 이슈 템플릿
-title: "네트워크강의#:"
+title: "네트워크강의-:"
 labels: ["lecture"]
 projects:
   - "org/8"
@@ -9,7 +9,7 @@ body:
     id: title
     attributes:
       label: 강의 제목
-      placeholder: 예) REST API 기본 개념
+      value: 네트워크강의-
     validations:
       required: false
 

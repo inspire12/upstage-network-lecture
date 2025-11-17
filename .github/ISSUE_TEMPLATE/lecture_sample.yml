@@ -1,6 +1,6 @@
 name: Lecture Template
 description: 강의 준비를 위한 이슈 템플릿
-title: "개발환경강의#: "
+title: "네트워크강의#:"
 labels: ["lecture"]
 projects:
   - "org/8"

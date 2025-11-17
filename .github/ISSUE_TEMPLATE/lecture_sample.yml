@@ -30,7 +30,7 @@ body:
       required: false
 
   - type: input
-    id: part
+    id: lecture
     attributes:
       label: 강좌
       value: 네트워크

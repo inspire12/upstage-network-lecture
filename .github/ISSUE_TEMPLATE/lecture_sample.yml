@@ -1,0 +1,40 @@
+name: Lecture Template
+description: 강의 준비를 위한 이슈 템플릿
+title: "개발환경강의#: "
+labels: ["lecture"]
+projects:
+  - "org/8"
+body:
+  - type: input
+    id: title
+    attributes:
+      label: 강의 제목
+      placeholder: 예) REST API 기본 개념
+    validations:
+      required: false
+
+  - type: input
+    id: ppt
+    attributes:
+      label: PPT URL
+      placeholder: https://docs.google.com/presentation/...
+    validations:
+      required: false
+
+  - type: input
+    id: part
+    attributes:
+      label: 강의 파트
+      placeholder: 예) 1부 – HTTP 기본 / 2부 – REST 설계
+    validations:
+      required: false
+
+  - type: input
+    id: part
+    attributes:
+      label: 강좌
+      value: 네트워크
+    validations:
+      required: true
+
+ 

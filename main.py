@@ -5,16 +5,21 @@ from dotenv import load_dotenv
 from openai import OpenAI  # openai==1.52.2
 import os
 
+from starlette.responses import StreamingResponse
+
 app = FastAPI()
 
 load_dotenv()
 
+
 class ChatRequest(BaseModel):
     prompt: str
+
 
 @app.get("/hello")
 async def hello():
     return {"message": "Hello FastAPI!"}
+
 
 @app.post("/query")
 async def query(message: ChatRequest):
@@ -32,8 +37,8 @@ async def query(message: ChatRequest):
 
     return response.data[0].embedding
 
-@app.post("/chat")
-def query(message: ChatRequest):
+
+def upstage_chat(message: ChatRequest):
     api_key = os.getenv("UPSTAGE_API_KEY")
     if not api_key:
         raise ValueError("UPSTAGE_API_KEY environment variable is required")
@@ -49,11 +54,20 @@ def query(message: ChatRequest):
                 "content": message.prompt
             }
         ],
-        stream=False,
+        stream=True,
     )
-    return {
-        'response': stream.choices[0].message.content
-    }
+
+    for chunk in stream:
+        if chunk.choices[0].delta.content is not None:
+            yield chunk.choices[0].delta.content
 
     # Use with stream=False
     # print(stream.choices[0].message.content)
+
+
+@app.post("/chat")
+def query(message: ChatRequest):
+    return StreamingResponse(
+        upstage_chat(message),
+        media_type="text/plain; charset=utf-8"
+    )

@@ -1,6 +1,7 @@
 import logging
 import logging.config
 import os
+from logging.handlers import RotatingFileHandler, TimedRotatingFileHandler
 
 LOGGING_CONFIG = {
 
@@ -33,9 +34,17 @@ def create_logger(
     logger = logging.getLogger(name)
     logger.setLevel(level)
 
-    # 2) 파일 핸들러 생성
-    file_handler = logging.FileHandler(filename, encoding="utf-8")
-    file_handler.setLevel(level)
+    # # 2) 파일 핸들러 생성
+    # file_handler = logging.FileHandler(filename, encoding="utf-8")
+    # file_handler.setLevel(level)
+
+    file_handler = TimedRotatingFileHandler(
+        filename,
+        encoding="utf-8",
+        backupCount=5,
+        when = "S",  # 초 단위 테스트용, 일반적으로 일/시간 단위 when="D"/ when="H"
+    )
+
     # 3) 포맷터 설정
     formatter = logging.Formatter(
         "%(asctime)s [%(levelname)s] %(name)s %(filename)s:%(lineno)d - %(message)s"

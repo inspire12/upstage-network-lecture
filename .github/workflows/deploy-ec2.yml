@@ -21,7 +21,7 @@ jobs:
           script: |
             BRANCH="${{ github.ref_name }}"
             echo "Deploying branch: $BRANCH"
-            cd /home/ubuntu/workspace/deploy/upstage-network-lecture
+            cd /home/ubuntu/workspace/deploy/upstage-network-lecture-day4
             
             # 원격 브랜치 가져오기 및 체크아웃
             git fetch origin "$BRANCH"
